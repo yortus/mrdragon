@@ -2,14 +2,15 @@
 
 // Initialize Phaser, and create a 400px by 490px game
 let game = new Phaser.Game(400, 490);
-let player, platforms, cursors, jumpButton, map;
+let player, platforms, cursors, jumpButton, map: Phaser.Tilemap;
+let backgroundlayer, blockedLayer;
 
 
 // Create our 'main' state that will contain the game
 var mainState = {
     preload: function() { 
-        // This function will be executed at the beginning     
-        // That's where we load the images and sounds 
+        // This function will be executed at the beginning
+        // That's where we load the images and sounds
 
         game.stage.backgroundColor = '#444';
 
@@ -20,7 +21,7 @@ var mainState = {
         game.load.image('player', 'assets/images/player.png');
         game.load.image('platform', 'assets/images/rocks.png');
         game.load.tilemap('level1', 'assets/tilemaps/level1.json', null, Phaser.Tilemap.TILED_JSON);
-        game.load.image('simples_pimples', 'assets/tilemaps/simples_pimples.png');
+        game.load.image('tiles', 'assets/tilemaps/tiles.png');
     },
 
     create: function() { 
@@ -33,15 +34,12 @@ var mainState = {
         map = game.add.tilemap('level1');
     
         //the first parameter is the tileset name as specified in Tiled, the second is the key to the asset
-        map.addTilesetImage('simples_pimples', 'simples_pimples');
+        map.addTilesetImage('tiles', 'tiles');
     
         //create layer
-        let backgroundlayer = map.createLayer('backgroundLayer');
-        let blockedLayer = map.createLayer('blockedLayer');
-    
-        //collision on blockedLayer
-        map.setCollisionBetween(1, 100000, true, 'blockedLayer');
-    
+        backgroundlayer = map.createLayer('backgroundLayer');
+        blockedLayer = map.createLayer('blockedLayer');
+        
         //resizes the game world to match the layer dimensions
         backgroundlayer.resizeWorld();
 
@@ -61,6 +59,11 @@ var mainState = {
         player.body.collideWorldBounds = true;
         player.body.gravity.y = 500;
 
+        //collision on blockedLayer
+        map.setCollisionBetween(1, 100000, true, 'blockedLayer');
+
+
+
         // platforms = game.add.physicsGroup();
 
         // platforms.create(500, 150, 'platform');
@@ -78,7 +81,8 @@ var mainState = {
         // This function is called 60 times per second    
         // It contains the game's logic   
 
-        game.physics.arcade.collide(player, platforms);
+        //game.physics.arcade.collide(player, platforms);
+        game.physics.arcade.collide(player, blockedLayer);
 
         player.body.velocity.x = 0;
 
