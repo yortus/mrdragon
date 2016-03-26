@@ -3,5 +3,5 @@
 
 ## To Do List
 
-- [ ] get phaser.js working
-- [ ] import tileset and tilemap
+- [x] get phaser.js working
+- [x] import tileset and tilemap
