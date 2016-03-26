@@ -1,0 +1,42 @@
+{
+  "name": "mrdragon",
+  "version": "0.0.1",
+  "description": "mrdragon",
+  "readmeFilename": "README.md",
+  "main": "built/index.js",
+  "typings": "built/index.d.ts",
+  "scripts": {
+    "build": "tsc -p src",
+    "clean": "rimraf built/",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yortus/mrdragon.git"
+  },
+  "keywords": [],
+  "contributors": [
+    {
+      "name": "Troy Gerwien",
+      "email": "yortus@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yortus/mrdragon/issues"
+  },
+  "homepage": "https://github.com/yortus/mrdragon#readme",
+  "dependencies": {
+    "asyncawait": "^1.0.3",
+    "lodash": "^4.6.1",
+    "phaser": "^2.4.6",
+    "routist": "^0.1.0"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5",
+    "pegjs": "^0.9.0",
+    "rimraf": "^2.5.2",
+    "typescript": "^1.9.0-dev.20160325"
+  }
+}
